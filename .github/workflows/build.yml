@@ -19,13 +19,13 @@ jobs:
         mkdir out
         OUT=$(realpath out)
         make -C $SRC O=$OUT gki_defconfig
-        $SRC/scripts/config --file $OUT/.config -e CONFIG_CFI_ICALL_NORMALIZE_INTEGERS -m CONFIG_IP_SET -m CONFIG_IP_SET_HASH_NET -m CONFIG_IP_SET_LIST_SET
+        $SRC/scripts/config --file $OUT/.config -e CONFIG_CFI_ICALL_NORMALIZE_INTEGERS -m CONFIG_UNIX_DIAG
         make -C $SRC O=$OUT olddefconfig
         make -C $SRC O=$OUT modules_prepare
-        make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset modules
+        make -C $SRC O=$OUT M=$SRC/net/unix modules
 
     - name: Upload kernel modules
       uses: actions/upload-artifact@v7
       with:
-        name: ipset_kos
-        path: /opt/ddk/src/android16-6.12/net/netfilter/ipset/*.ko
+        name: modules
+        path: /opt/ddk/src/android16-6.12/net/unix/*.ko
