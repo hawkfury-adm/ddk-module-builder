@@ -15,7 +15,8 @@ on:
       module_path:
         description: 'Module relative path in kernel tree (e.g., net/unix or net/netfilter/ipset)'
         required: true
-        default: 'net/netfilter'
+        # default: 'net/netfilter'
+        default: 'net/ipv6/netfilter'
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
