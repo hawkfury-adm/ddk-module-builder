@@ -16,7 +16,7 @@ on:
         description: 'Module relative path in kernel tree (e.g., net/unix or net/netfilter/ipset)'
         required: true
         # default: 'net/netfilter'
-        default: 'net/ipv6'
+        default: 'net/ipv6/netfilter'
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
@@ -55,7 +55,7 @@ jobs:
         make -C $SRC O=$OUT olddefconfig
         make -C $SRC O=$OUT modules_prepare
         # CONFIG_IP_SET_MAX=65534 make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
-        make -C $SRC O=$OUT M=$SRC/net/ipv6/netfilter M=$SRC/net/ipv6 modules
+        make -C $SRC O=$OUT M=$SRC/net/ipv6/netfilter modules
 
     - name: Upload kernel modules
       uses: actions/upload-artifact@v7
