@@ -15,13 +15,13 @@ on:
       module_path:
         description: 'Module relative path in kernel tree (e.g., net/unix or net/netfilter/ipset)'
         required: true
-        # default: 'net/netfilter'
-        default: 'net/ipv6/netfilter'
+        default: 'net/netfilter'
+        # default: 'net/ipv6/netfilter'
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET' # ./scripts/config --set-val CONFIG_IP_SET_MAX 65534
         required: false
-        # default: '-m CONFIG_IP_SET -m CONFIG_IP_SET_HASH_NET -m CONFIG_IP_SET_LIST_SET -m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE -m CONFIG_NETFILTER_XT_SET'
-        default: '-m CONFIG_IP6_NF_NAT -m CONFIG_IP6_NF_TARGET_MASQUERADE'
+        default: '--set-val CONFIG_IP_SET_MAX 65534 -m CONFIG_IP_SET -m CONFIG_IP_SET_HASH_NET -m CONFIG_IP_SET_LIST_SET -m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE -m CONFIG_NETFILTER_XT_SET'
+        # default: '-m CONFIG_IP6_NF_NAT -m CONFIG_IP6_NF_TARGET_MASQUERADE'
 
 jobs:
   build-ko:
@@ -54,8 +54,8 @@ jobs:
         $SRC/scripts/config --file $OUT/.config $CONFIG_ARGS
         make -C $SRC O=$OUT olddefconfig
         make -C $SRC O=$OUT modules_prepare
-        # CONFIG_IP_SET_MAX=65534 make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
-        make -C $SRC O=$OUT M=$SRC/net/ipv6/netfilter modules
+        make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
+        # make -C $SRC O=$OUT M=$SRC/net/ipv6/netfilter modules
 
     - name: Upload kernel modules
       uses: actions/upload-artifact@v7
