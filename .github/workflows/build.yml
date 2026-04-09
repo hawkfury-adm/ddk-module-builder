@@ -18,7 +18,7 @@ on:
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
-        default: ''
+        default: '-m CONFIG_IP_SET'
 
 jobs:
   build-ko:
