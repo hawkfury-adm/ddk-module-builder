@@ -19,7 +19,7 @@ on:
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
-        default: '-m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE -m CONFIG_NETFILTER_XT_SET'
+        default: '-m CONFIG_NETFILTER_XT_SET -m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE'
 
 jobs:
   build-ko:
