@@ -19,7 +19,7 @@ on:
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
-        default: '-m CONFIG_NETFILTER_XT_SET'
+        default: '-m CONFIG_IP_SET -m CONFIG_IP_SET_HASH_NET -m CONFIG_IP_SET_LIST_SET -m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE -m CONFIG_NETFILTER_XT_SET'
 
 jobs:
   build-ko:
@@ -52,7 +52,7 @@ jobs:
         $SRC/scripts/config --file $OUT/.config $CONFIG_ARGS
         make -C $SRC O=$OUT olddefconfig
         make -C $SRC O=$OUT modules_prepare
-        make -C $SRC O=$OUT M=$SRC/$MODULE_PATH modules
+        make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
 
     - name: Upload kernel modules
       uses: actions/upload-artifact@v7
