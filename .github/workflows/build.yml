@@ -15,10 +15,11 @@ on:
       module_path:
         description: 'Module relative path in kernel tree (e.g., net/unix or net/netfilter/ipset)'
         required: true
+        default: 'net/netfilter'
       configs:
         description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET'
         required: false
-        default: '-m CONFIG_IP_SET -m CONFIG_IP_SET_HASH_NET -m CONFIG_IP_SET_LIST_SET'
+        default: '-m CONFIG_NETFILTER_XT_MATCH_ADDRTYPE -m CONFIG_NETFILTER_XT_SET'
 
 jobs:
   build-ko:
