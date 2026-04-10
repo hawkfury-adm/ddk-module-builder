@@ -58,7 +58,7 @@ jobs:
         make -C $SRC O=$OUT modules_prepare
         # make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules # CONFIG_IP_SET_MAX=65534 make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
         # make -C $SRC O=$OUT M=$SRC/net/ipv6/netfilter modules
-        make -C $SRC O=$OUT M=$SRC/net/netfilter modules
+        make -C $SRC O=$OUT M=$SRC/net/netfilter M=$SRC/net/netfilter/ipset modules
 
     - name: Upload kernel modules
       uses: actions/upload-artifact@v7
