@@ -16,3 +16,17 @@
 ## TODO
 
 目前只能构建 ddk 中的源码的模块，可以考虑增加从其他仓库拉取源码，或者构建树外模块的支持。
+
+## 使用该脚本构建内核模块主要需要修改以下三处
+
+      module_path:
+        description: 'Module relative path in kernel tree (e.g., net/unix or net/netfilter/ipset)'
+        required: true
+        default: ''
+
+      configs:
+        description: 'Options pass to scripts/config, e.g., -m CONFIG_UNIX_DIAG or -m CONFIG_IP_SET' # ./scripts/config --set-val CONFIG_IP_SET_MAX 65534
+        required: false
+        default: ''
+
+make -C $SRC O=$OUT M=$SRC/net/netfilter/ipset M=$SRC/net/netfilter modules
